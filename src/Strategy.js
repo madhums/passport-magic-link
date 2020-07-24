@@ -34,8 +34,8 @@ class MagicLinkStrategy extends PassportStrategy {
     if (!secret) throw new Error('Magic Link authentication strategy requires an encryption secret')
     if (!userFields || !userFields.length) throw new Error('Magic Link authentication strategy requires an array of mandatory user fields')
     if (!tokenField) throw new Error('Magic Link authentication strategy requires a token field')
-    if (!sendTokenCallback || sendToken) throw new Error('Magic Link authentication strategy requires a sendToken function')
-    if (!verifyUserCallback || verifyUser) throw new Error('Magic Link authentication strategy requires a verifyUser function')
+    if (!(sendTokenCallback || sendToken)) throw new Error('Magic Link authentication strategy requires a sendToken function')
+    if (!(verifyUserCallback || verifyUser)) throw new Error('Magic Link authentication strategy requires a verifyUser function')
     super()
 
     this.name = 'magiclink'
