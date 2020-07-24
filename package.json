@@ -1,5 +1,5 @@
 {
-  "name": "passport-magic-link",
+  "name": "passport-magic-link-vic",
   "version": "2.1.0",
   "description": "Passport JS module for Magic Link authentication",
   "main": "index.js",
