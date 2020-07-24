@@ -24,10 +24,12 @@ class MagicLinkStrategy extends PassportStrategy {
       ttl = 60 * 10, // default: 10 minutes
       passReqToCallbacks = false,
       verifyUserAfterToken = false,
-      storage = memoryStorage // default: In-memory storage
+      storage = memoryStorage, // default: In-memory storage
+      sentToken,
+      verifyUser
     },
-    sendToken,
-    verifyUser
+    sendTokenCallback,
+    verifyUserCallback
   ) {
     if (!secret) throw new Error('Magic Link authentication strategy requires an encryption secret')
     if (!userFields || !userFields.length) throw new Error('Magic Link authentication strategy requires an array of mandatory user fields')
@@ -44,8 +46,8 @@ class MagicLinkStrategy extends PassportStrategy {
     this.userFields = userFields
     this.tokenField = tokenField
     this.storage = storage
-    this.sendToken = sendToken
-    this.verifyUser = verifyUser
+    this.sendToken = sendTokenCallback || sendToken
+    this.verifyUser = verifyUserCallback || verifyUser
   }
 
   async authenticate (req, options = {}) {
